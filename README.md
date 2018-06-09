@@ -6,7 +6,13 @@ Role Variables
 --------------
 
 ```
-# Any Vars?
+mariadb_enable: true
+
+database_bind_interface: '0.0.0.0'
+
+database_name: dev
+database_username: foo
+database_password: foobar
 ```
 
 ----------------
