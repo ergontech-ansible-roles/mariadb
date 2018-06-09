@@ -1,2 +1,16 @@
 ---
 
+- name: Exit role if mariadb is not enabled
+  fail:
+    msg: mariadb_enable var is false
+  when: not mariadb_enable
+  tags:
+    - mariadb
+
+- include: install.yml
+  tags:
+    - mariadb
+
+- include: setup-db.yml
+  tags:
+    - mariadb

@@ -1,0 +1,25 @@
+---
+
+- name: Install mariadb packages
+  become: yes
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - mariadb-server
+    - python3-mysqldb
+
+- name: Install server configs
+  become: yes
+  template:
+    src: server.cnf.j2
+    dest: /etc/mysql/mariadb.conf.d/50-server.cnf
+    mode: 644
+  notify: restart mysql
+
+- name: Ensure Mariadb is started and enabled
+  become: yes
+  service:
+    name: mysql
+    state: started
+    enabled: yes

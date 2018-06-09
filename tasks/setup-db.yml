@@ -1,0 +1,16 @@
+---
+
+- name: Create database
+  become: yes
+  mysql_db:
+    state: present
+    name: "{{ database_name }}"
+
+- name: Create database user
+  become: yes
+  mysql_user:
+    state: present
+    name: "{{ database_username }}"
+    password: "{{ database_password }}"
+    priv: "*.*:ALL"
+    host: "%"
